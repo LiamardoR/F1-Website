@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <title>Search Engines</title>
+
+  <style>
+
+@font-face {
+  font-family: 'Formula1';
+  src: url('Fonts/Formula1-Display-Wide.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
+     :root {
+      --bg: #1e1e1e;
+      --fg: #eee;
+      --card-bg: #2a2a2a;
+      --btn-bg: #555;
+      --text: white;
+      --timeline-bg: var(--card-bg);
+      --timeline-bar: #777;
+      --timeline-start: #f7931e;
+      --timeline-start-hover: #f15a24;
+    }
+
+    body.dark {
+      --bg: #afafaf;
+      --fg: #222;
+      --card-bg: white;
+      --btn-bg: #333;
+      --text: white;
+      --timeline-bg: var(--card-bg);  
+      --timeline-bar: #555;
+      --timeline-start: #f7931e;
+      --timeline-start-hover: #f15a24;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+
+      font-family: 'Formula1';
+ 	src: url('fonts/Formula1-Regular.woff2') format('woff2');
+ 	font-weight: normal;
+        font-style: normal;
+
+      font-family: -apple-system, BlinkMacSystemFont, "San Francisco", "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      font-weight: bold;
+      margin: 0;
+      background-color: var(--bg);
+      color: var(--fg);
+      padding: 20px 20px 20px 80px;
+      overflow-x: hidden;
+      transition: background-color 0.3s, color 0.3s;
+    }
+
+   .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .title img {
+      width: 100px;
+      height: auto;
+    }
+
+    .title-box {
+      margin-bottom: 80px;
+    }
+
+
+    .f1-font {
+  font-family: 'Formula1', sans-serif;
+  font-weight: bold;
+}
+
+
+    .title h1 {
+      font-size: 3.5em;
+      margin: 0;
+      color: #e10600;
+    }
+
+
+    h1 {
+      img-size: 5.5em;
+      margin: 0;
+    }
+
+    .zoom-in {
+      opacity: 0;
+      transform: scale(0.9);
+      transition: all 0.6s ease;
+    }
+
+    .zoom-in.visible {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 60px;
+      height: 100%;
+      background-color: var(--btn-bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-top: 20px;
+      gap: 20px;
+      z-index: 1000;
+    }
+
+    .sidebar svg {
+      width: 24px;
+      height: 24px;
+      fill: var(--text);
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .sidebar svg:hover {
+      transform: scale(1.2);
+    }
+
+    .tooltip {
+      position: relative;
+    }
+
+    .tooltip::after {
+      content: attr(data-title);
+      position: absolute;
+      left: 35px;
+      top: 0;
+      background: var(--fg);
+      color: var(--card-bg);
+      padding: 4px 8px;
+      font-size: 0.75em;
+      white-space: nowrap;
+      border-radius: 6px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(-10px);
+      transition: all 0.2s ease;
+    }
+
+    .tooltip:hover::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+   .title {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .title img {
+      width: 100px;
+      height: auto;
+    }
+
+    .title-box {
+      margin-bottom: 80px;
+    }
+
+
+    .f1-font {
+  font-family: 'Formula1', sans-serif;
+  font-weight: bold;
+}
+
+
+    .title h1 {
+      font-size: 3.5em;
+      margin: 0;
+      color: #e10600;
+    }
+
+
+    h1 {
+      img-size: 5.5em;
+      margin: 0;
+    }
+
+    .box {
+  background-color: var(--card-bg);
+  padding: 20px 40px;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  flex: 1 1 300px;
+  max-width: 500px;
+  margin-bottom: 30px;
+}
+
+    /* Page fade in/out */
+    body.fade-out { opacity:0; transition:opacity 0.5s;}
+
+    body.fade-in { opacity:1; transition:opacity 0.5s;}
+
+</style>
+</head>
+<body class="fade-in">
+
+<div class="title-box zoom-in">
+  <div class="title f1-font">
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/33/F1.svg" alt="F1 Logo" style="width: 400px; height: auto;" />
+  </div>
+</div>
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="tooltip" data-title="Home">
+    <a href="home.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div class="tooltip" data-title="Drivers">
+    <a href="drivers.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 12c2.67 0 8 1.34 8 4v4h-16v-4c0-2.66 5.33-4 8-4zm0-2a4 4 0 110-8 4 4 0 010 8z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div class="tooltip" data-title="Timeline">
+    <a href="timeline.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M5 3v18h14V3H5zm2 2h10v14H7V5z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+    <div class="tooltip" data-title="Cars">
+      <a href="cars.html" class="smooth-nav">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div class="tooltip" data-title="Placeholder 2">
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <rect width="18" height="18" x="3" y="3" fill="white"/>
+      </svg>
+    </a>
+  </div>
+</div>
+  
+  <img src="Cars/mc-fr-me-re-wi-ra.png" alt="Description of image 1" class="center">
+
+  <img src="Cars/ha-as-ki-al.png" alt="Description of image 2" class="center">
+
+  <script>
+
+    const observerOptions = {
+       root: null,
+       rootMargin: '0px',
+       threshold: 0.1,
+    };
+    
+    // Theme toggle
+    function toggleTheme() {
+      document.body.classList.toggle('dark');
+    }
+
+  // Lazy load with animation re-trigger on scroll
+    function setupVisibilityObserver() {
+      const items = document.querySelectorAll('.zoom-in');
+
+      // Intersection Observer options
+      const options = {
+        root: null, // viewport
+        rootMargin: '0px',
+        threshold: 0.1, // 10% visible
+      };
+
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            // Add class to trigger animation
+            entry.target.classList.add('visible');
+          } else {
+            // Remove class so animation can trigger again when visible later
+            entry.target.classList.remove('visible');
+          }
+        });
+      }, options);
+
+      items.forEach(item => {
+        observer.observe(item);
+      });
+    }
+
+<!-- Sidebar -->
+<div class="sidebar">
+  <div class="tooltip" data-title="Home">
+    <a href="home.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M3 12l9-9 9 9h-3v9h-12v-9h-3z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div class="tooltip" data-title="Drivers">
+    <a href="drivers.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M12 12c2.67 0 8 1.34 8 4v4h-16v-4c0-2.66 5.33-4 8-4zm0-2a4 4 0 110-8 4 4 0 010 8z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div class="tooltip" data-title="Timeline">
+    <a href="timeline.html">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <path d="M5 3v18h14V3H5zm2 2h10v14H7V5z" fill="white"/>
+      </svg>
+    </a>
+  </div>
+    <div class="tooltip" data-title="Cars">
+      <a href="cars.html" class="smooth-nav">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" fill="white"/>
+      </svg>
+    </a>
+  </div>
+  <div class="tooltip" data-title="Placeholder 2">
+    <a href="#">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+        <rect width="18" height="18" x="3" y="3" fill="white"/>
+      </svg>
+    </a>
+  </div>
+</div>
+
+
+  <!-- Dark/Light Toggle -->
+  <button class="toggle-btn" onclick="toggleTheme()">Toggle Mode</button>
+
+<!-- TIMELINE SECTION - F1 Legendary Drivers -->
+<div class="timeline-section zoom-in">
+  <h2 class="f1-font" style="font-size: 1.75em; font-weight: normal; text-transform: uppercase;">Legendary F1 Drivers</h2>
+  <div class="timeline-container">
+    <div class="timeline-wrapper" id="timelineWrapper">
+      <!-- Start Button -->
+      <div class="start-circle" id="startButton">
+        Start
+      </div>
+
+</script>
+</body>
+</html>
